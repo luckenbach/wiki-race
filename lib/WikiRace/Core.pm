@@ -27,10 +27,12 @@ sub start {
         $self->session( finish => $finish );
         my $finish_title = $finish;
         $finish_title =~ s/\s/_/g;
+	my $start_title = $start; 
+	$start_title =~ s/\s/_/g;
         my $page = $ua->get("http://en.wikipedia.org/wiki/$finish_title");
         my $wiki_data = $page->res->dom->at('div#content.mw-body')->all_text;
 	
-        $self->render(wiki_data => $wiki_data, start => $start, finish => $finish);
+        $self->render(wiki_data => $wiki_data, start => $start, finish => $finish, start_title => $start_title);
 
 
 }
