@@ -3,6 +3,7 @@ use lib '..';
 use Helper;
 use Mojo::Base 'Mojolicious::Controller';
 use Data::Dumper;
+use Mojo::Log;
 use Mojo::UserAgent;
 my $ua = Mojo::UserAgent->new;
 
@@ -47,12 +48,15 @@ sub getPage {
 	if($page_title =~ /$finish/) {
                 $self->render(count => $count, template => 'core/victory');
         } else {
+		$log->debug("Starting get");
 		my $page = $ua->get("http://en.wikipedia.org/wiki/$page_title")->res->dom;
-		print Dumper($page);
+		$log->debug("Starting Parse");
 		my $wiki_data = $page->at('div#content.mw-body');
+		$log->debug("Starting replace");
 		$wiki_data =~ s/\/wiki\//\/getPage\//g;
 		$wiki_data =~ s/Jump to:.*//g;
-		$wiki_data =~ s/.*\/w\/.*//g;
+		#$wiki_data =~ s/.*\/w\/.*//g;
+		$log->debug("out of replace");
 		$count++;
 		$self->session( count => $count);
 		$self->render(wiki_data => $wiki_data, count => $count);

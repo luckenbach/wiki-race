@@ -17,18 +17,15 @@ $VERSION = 1.00;
 @ISA    = qw(Exporter);
 @EXPORT = qw(
 	$wiki
+	$log
 
 );
 @EXPORT_OK = qw(
 	$wiki
+	$log
 );
 
 ############################ User Variables ###############################
-
-
-
-
-
 
 
 
@@ -40,7 +37,7 @@ $VERSION = 1.00;
 
 # Setup logging
 
-our $path = '/home/www-data/apps/wiki_race/log/vip_tool.log';
+our $path = '/home/risk/apps/wiki_race/log/wiki_race.log';
 our $log = Mojo::Log->new(path => $path, level => 'info');
 
 
