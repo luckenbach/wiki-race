@@ -20,10 +20,17 @@ body {
   text-align: center;
 }
 </style>
+
+<script src="/assets/js/jquery.js"></script>
   </head>
 	<body>
+	
 		<%= content %>
-		<script src="/assets/js/jquery.js"></script>
 		<script src="/assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$('span.mw-editsection').hide();
+		</script>
+
 	</body>
 </html>
+

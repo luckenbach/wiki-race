@@ -42,5 +42,6 @@
 <script type="text/JavaScript">
 <!--
 setTimeout("location.href = '/getPage/<%== $start_title %>';",10000);
+$("div.panel.panel-default.text-center").find("a").attr("href", "#");
 -->
 </script>

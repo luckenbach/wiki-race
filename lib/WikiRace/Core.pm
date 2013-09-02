@@ -31,8 +31,8 @@ sub start {
 	my $start_title = $start; 
 	$start_title =~ s/\s/_/g;
 	$self->session( finish_title => $finish_title);
-        my $page = $ua->get("http://en.wikipedia.org/wiki/$finish_title");
-        my $wiki_data = $page->res->dom->at('div#content.mw-body')->all_text;
+        my $page = $ua->get("http://en.wikipedia.org/wiki/$finish_title")->res->dom;
+        my $wiki_data = $page->at('div#content.mw-body');
 	
         $self->render(wiki_data => $wiki_data, start => $start, finish => $finish, start_title => $start_title);
 

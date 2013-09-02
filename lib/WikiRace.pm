@@ -16,7 +16,7 @@ sub startup {
 
 	$r->post('/')->to('core#start');
 	
-	$r->get('/getPage/:wikiPage')->to('core#getPage');
+	$r->get('/getPage/#wikiPage')->to('core#getPage');
 	
 	$r->get('/reset' => sub {
 		my $self = shift;
