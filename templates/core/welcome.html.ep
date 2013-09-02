@@ -1,0 +1,12 @@
+% layout 'default';
+%= include 'parts/default-nav'
+
+<div class="container">
+	<div class="starter-template">
+        	<h1>Welcome to Wiki Races</h1>
+	        <p class="lead">This is a game where you attempt to get from one wikipeida page to another in the least amount of clicked links</p>
+		<form name="start" method="POST" action="/">
+			<button type="submit" class="btn btn-primary">Start</button>
+		</form>
+	</div>
+</div>

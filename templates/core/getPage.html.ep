@@ -1,0 +1,24 @@
+% layout 'default';
+%= include 'parts/default-nav'
+<div class="container">
+	<div class="template">
+        	<h1>And we are off!!</h1>
+		<div id="start">
+			start at: <b><%= session 'start' %></b>
+		</div>
+		<div id="finish">
+			finish at: <b><%= session 'finish' %></b>
+		</div>
+	        <div id="count">
+                        count: <b><%= $count %></b>
+                </div>
+
+				
+	</div>
+	<div>
+		<div id="wiki" class="jumbotron">
+			<%== $wiki_data %>
+		</div>
+	</div>	
+
+</div>

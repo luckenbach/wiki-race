@@ -1,0 +1,25 @@
+% layout 'default';
+%= include 'parts/default-nav'
+<div class="container">
+	<div class="template">
+        	<h1>And we are off!!</h1>
+		<div id="start">
+			start at: <b><%= session 'start' %></b>
+		</div>
+		<div id="finish">
+			finish at: <b><%= session 'finish' %></b>
+		</div>
+	        <div id="count">
+                        count: <b><%= $count %></b>
+                </div>
+
+		<div class="span9">
+			<div id="wiki">
+			</div>
+		</div>	
+		<div class="hero-unit span6">
+		<p> VICTORY!!!!!</p>
+		</div>
+		
+	</div>
+</div>
