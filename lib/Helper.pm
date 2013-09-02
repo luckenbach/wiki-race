@@ -37,7 +37,7 @@ $VERSION = 1.00;
 
 # Setup logging
 
-our $path = '/home/risk/apps/wiki_race/log/wiki_race.log';
+our $path = '/home/nginx/wiki-race/log/wiki_race.log';
 our $log = Mojo::Log->new(path => $path, level => 'info');
 
 

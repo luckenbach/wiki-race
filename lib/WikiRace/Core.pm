@@ -30,6 +30,7 @@ sub start {
         $finish_title =~ s/\s/_/g;
 	my $start_title = $start; 
 	$start_title =~ s/\s/_/g;
+	$self->session( finish_title => $finish_title);
         my $page = $ua->get("http://en.wikipedia.org/wiki/$finish_title");
         my $wiki_data = $page->res->dom->at('div#content.mw-body')->all_text;
 	
@@ -44,8 +45,10 @@ sub getPage {
 	my $count = $self->session('count') ||"0";
 	my $start = $self->session('start');
 	my $finish = $self->session('finish');
+	my $finish_title = $self->session('finish_title');
 	my $page_title = $self->param('wikiPage');
-	if($page_title =~ /$finish/) {
+	$log->info("Start : $start - Fin : $finish_title - Current : $page_title");
+	if($page_title eq $finish_title) {
                 $self->render(count => $count, template => 'core/victory');
         } else {
 		$log->debug("Starting get");
