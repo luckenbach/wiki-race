@@ -47,6 +47,14 @@ sub getPage {
 	my $finish = $self->session('finish');
 	my $finish_title = $self->session('finish_title');
 	my $page_title = $self->param('wikiPage');
+	my $crumb = $self->session('bread_crumb');
+	if($crumb) {
+		$crumb = $crumb . "->$page_title";
+		$crumb =~ s/_/ /g;
+		$self->session('bread_crumb' => $crumb);
+	} else {
+		$self->session('bread_crumb' => $start);
+	}
 	$log->info("Start : $start - Fin : $finish_title - Current : $page_title");
 	if($page_title eq $finish_title) {
                 $self->render(count => $count, template => 'core/victory');
@@ -58,7 +66,6 @@ sub getPage {
 		$log->debug("Starting replace");
 		$wiki_data =~ s/\/wiki\//\/getPage\//g;
 		$wiki_data =~ s/Jump to:.*//g;
-		#$wiki_data =~ s/.*\/w\/.*//g;
 		$log->debug("out of replace");
 		$count++;
 		$self->session( count => $count);

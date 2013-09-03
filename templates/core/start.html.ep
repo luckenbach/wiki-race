@@ -41,7 +41,8 @@
 </div>
 <script type="text/JavaScript">
 <!--
-setTimeout("location.href = '/getPage/<%== $start_title %>';",10000);
-$("div.panel.panel-default.text-center").find("a").attr("href", "#");
+	setTimeout("location.href = '/getPage/<%== $start_title %>';",10000);
+  	$("a.external.text").attr("style", "color: rgb(255,0,0)");
+	$("div.panel.panel-default.text-center").find("a").attr("href", "#");
 -->
 </script>
