@@ -17,6 +17,9 @@ sub welcome {
 
 sub start {
         my $self = shift;
+	# on the start page set current count to 0 (due to replay);
+	$self->session('count' => '0');
+	$self->session('bread_crumb' => '');
         my $pages = $wiki->api({
                 action          => 'query',
                 list            => 'random',
@@ -33,7 +36,6 @@ sub start {
 	$self->session( finish_title => $finish_title);
         my $page = $ua->get("http://en.wikipedia.org/wiki/$finish_title")->res->dom;
         my $wiki_data = $page->at('div#content.mw-body');
-	
         $self->render(wiki_data => $wiki_data, start => $start, finish => $finish, start_title => $start_title);
 
 
@@ -42,23 +44,23 @@ sub start {
 
 sub getPage {
 	my $self = shift;
-	my $count = $self->session('count') ||"0";
+	my $count = $self->session('count');
 	my $start = $self->session('start');
 	my $finish = $self->session('finish');
 	my $finish_title = $self->session('finish_title');
 	my $page_title = $self->param('wikiPage');
 	my $crumb = $self->session('bread_crumb');
-	if($crumb) {
-		$crumb = $crumb . "->$page_title";
-		$crumb =~ s/_/ /g;
-		$self->session('bread_crumb' => $crumb);
-	} else {
-		$self->session('bread_crumb' => $start);
-	}
 	$log->info("Start : $start - Fin : $finish_title - Current : $page_title");
 	if($page_title eq $finish_title) {
                 $self->render(count => $count, template => 'core/victory');
         } else {
+		if($crumb) {
+			$crumb = $crumb . "->$page_title";
+			$crumb =~ s/_/ /g;
+			$self->session('bread_crumb' => $crumb);
+		} else {
+			$self->session('bread_crumb' => $start);
+		}
 		$log->debug("Starting get");
 		my $page = $ua->get("http://en.wikipedia.org/wiki/$page_title")->res->dom;
 		$log->debug("Starting Parse");

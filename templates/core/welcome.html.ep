@@ -4,7 +4,8 @@
 <div class="container">
 	<div class="starter-template">
         	<h1>Welcome to Wiki Races</h1>
-	        <p class="lead">This is a game where you attempt to get from one wikipeida page to another in the least amount of clicked links <br> Links in red are external, you will be given a brief preview of the end page and the forwarded to your starting page</p>
+	        <p class="lead">This is a game where you attempt to get from one wikipeida page to another in the least amount of clicked links <br> Links in <font style="color:red">red</font> are external. You will be given 10 seconds to review your destination page and gleam as much information possible before being forwarded to your starting page.</p>
+		<p class="text-center text-primary">Good Luck!!!</p>
 		<form name="start" method="POST" action="/">
 			<button type="submit" class="btn btn-primary">Start</button>
 		</form>
