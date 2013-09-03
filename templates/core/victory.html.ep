@@ -1,8 +1,9 @@
 % layout 'default';
 %= include 'parts/default-nav'
+%= javascript '/assets/js/confetti.min.js'
 <div class="container">
 	<div class="template">
-        	<h1>And we are off!!</h1>
+        	<h1>VICTORY!!!!!</h1>
 		<div id="start">
 			start at: <b><%= session 'start' %></b>
 		</div>
@@ -13,10 +14,6 @@
                         count: <b><%= $count %></b>
                 </div>
 
-		<div class="span9">
-			<div id="wiki">
-			</div>
-		</div>	
 		<div class="hero-unit span6">
 		<p> VICTORY!!!!!</p>
 		</div>
