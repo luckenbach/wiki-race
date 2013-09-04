@@ -5,8 +5,8 @@ use Mojo::Base 'Mojolicious::Controller';
 use Data::Dumper;
 use Mojo::Log;
 use Mojo::UserAgent;
-my $ua = Mojo::UserAgent->new;
 
+my $ua = Mojo::UserAgent->new;
 
 
 sub welcome {
@@ -67,9 +67,9 @@ sub getPage {
 		} else {
 			$self->session('bread_crumb' => $start);
 		}
+		$page_title =~ s/\ /_/g;
 		$log->debug("Starting get");
 		my $page = $ua->get("http://en.wikipedia.org/wiki/$page_title")->res->dom;
-		$log->debug("Starting Parse");
 		my $wiki_data = $page->at('div#content.mw-body');
 		$log->debug("Starting replace");
 		$wiki_data =~ s/\/wiki\//\/getPage\//g;
