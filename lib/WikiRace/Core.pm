@@ -9,7 +9,6 @@ my $ua = Mojo::UserAgent->new;
 
 
 
-
 sub welcome {
 	my $self = shift;
 	$self->render();
@@ -20,13 +19,20 @@ sub start {
 	# on the start page set current count to 0 (due to replay);
 	$self->session('count' => '0');
 	$self->session('bread_crumb' => '');
-        my $pages = $wiki->api({
-                action          => 'query',
-                list            => 'random',
-                rnnamespace     => '0',
-                rnlimit         => '2' });
-        my $start       = $pages->{query}->{random}->[0]->{'title'};
-        my $finish      = $pages->{query}->{random}->[1]->{'title'};
+#        my $pages = $wiki->api({
+#                action          => 'query',
+#                list            => 'random',
+#                rnnamespace     => '0',
+#                rnlimit         => '2' });
+#        my $start       = $pages->{query}->{random}->[0]->{'title'};
+#        my $finish      = $pages->{query}->{random}->[1]->{'title'};
+	my $article_count = $articles->count();
+	my $rand1 = int(rand($article_count));
+	my $rand2 = int(rand($article_count));
+	my $start_doc = $articles->find()->limit('-1')->skip($rand1)->next();
+	my $finish_doc = $articles->find()->limit('-1')->skip($rand2)->next();
+	my $start = $start_doc->{'Title'};
+	my $finish = $finish_doc->{'Title'};
         $self->session( start => $start );
         $self->session( finish => $finish );
         my $finish_title = $finish;
