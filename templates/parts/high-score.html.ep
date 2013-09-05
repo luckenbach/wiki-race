@@ -1,0 +1,28 @@
+        <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                        <div class="panel panel-default text-center">
+                                <div class="panel-heading">Highscore set!!!</div>
+                                <div class="panel-body text-center">
+					<form name="HighScore" method="POST" action="/HighScore" class="form-horizontal" role="form">
+                        <fieldset>
+                        <div class="form-group">
+                                <label for="User" class="sr-only">Starting Page</label>
+                                <input name="User" id="start" placeholder="Starting Page">
+                        </div>
+
+        </form>
+
+							<button type="submit" class="btn btn-success">Submit <span class="glyphicon glyphicon-thumbs-up"></span></button>
+
+                        </fieldset>
+					</form>
+                                </div>
+                        </div>
+
+                </div>
+                <div class="col-md-4">
+                </div>
+        </div>
+
