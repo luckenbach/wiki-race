@@ -17,6 +17,10 @@ sub startup {
 	$r->post('/')->to('core#start');
 	
 	$r->get('/getPage/*wikiPage')->to('core#getPage');
+
+	$r->get('/challenge')->to('core#challenge');
+
+	$r->post('/startChallenge')->to('core#startChallenge');
 	
 	$r->get('/reset' => sub {
 		my $self = shift;

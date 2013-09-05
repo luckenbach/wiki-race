@@ -80,5 +80,27 @@ sub getPage {
 		$self->render(wiki_data => $wiki_data, count => $count);
 	}
 }
+sub startChallenge {
+        my $self = shift;
+	# on the start page set current count to 0 (due to replay);
+	$self->session('count' => '0');
+	$self->session('bread_crumb' => '');
+	my $start = $self->param('start');
+	my $finish = $self->param('finish');
+	$log->info("start : $start - finihs : $finish");
+        $self->session( start => $start );
+        $self->session( finish => $finish );
+        my $finish_title = $finish;
+        $finish_title =~ s/\s/_/g;
+	my $start_title = $start; 
+	$start_title =~ s/\s/_/g;
+	$self->session( finish_title => $finish_title);
+        my $page = $ua->get("http://en.wikipedia.org/wiki/$finish_title")->res->dom;
+        my $wiki_data = $page->at('div#content.mw-body');
+        $self->render(wiki_data => $wiki_data, start => $start, finish => $finish, start_title => $start_title);
+
+
+}
+
 
 1;

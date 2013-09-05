@@ -1,0 +1,37 @@
+% layout 'default';
+%= include 'parts/default-nav'
+<div class="jumbotron">
+  <div class="container">
+    <h3 class="text-center">Think you are better than your friends.... Challenge them to a wiki race</h3>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <h2 class="text-center">Select your pages:</h2>
+	<form method="post" id="challenge-form" action="/startChallenge" class="form-inline text-center" novalidate="novalidate">
+			<fieldset>
+			<div class="form-group">
+				<label for="start" class="sr-only">Starting Page</label>
+				<input name="start" id="start">
+			</div>
+
+			<div class="form-group">
+				<label for="finish" class="sr-only">Ending page:</label>
+					<input name="finish" id="finish">
+			</div>
+
+				<button class="btn btn-default" type="submit" id="submit">Start &raquo;</button>
+			</fieldset>
+	</form>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+
+  <hr>
+</div> 
