@@ -9,7 +9,7 @@
                         <fieldset>
                         <div class="form-group">
                                 <label for="User" class="sr-only">Starting Page</label>
-                                <input name="User" id="start" placeholder="Starting Page">
+                                <input name="User" id="start" placeholder="Initals">
                         </div>
 
         </form>
