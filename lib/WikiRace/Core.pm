@@ -39,6 +39,10 @@ sub start {
 		$start = $start_doc->{'Title'};
 		$finish = $finish_doc->{'Title'};
 	};
+	$records->insert({ "start" => "$start", "finish" => "$finish" });
+	$records->update({ "start" => "$start", "finish" => "$finish" }, {'$inc' => { 'count' => 1}});
+
+
         $self->session( start => $start );
         $self->session( finish => $finish );
         my $finish_title = $finish;
@@ -103,8 +107,8 @@ sub startChallenge {
 	$self->session( finish_title => $finish_title);
         my $page = $ua->get("http://en.wikipedia.org/wiki/$finish_title")->res->dom;
         my $wiki_data = $page->at('div#content.mw-body');
+	$records->insert({ "start" => "$start", "finish" => "$finish" });
         $self->render(wiki_data => $wiki_data, start => $start, finish => $finish, start_title => $start_title);
-
 
 }
 
