@@ -35,6 +35,10 @@
                         </div>
                 </div>
         </div>
+	% if (session 'HighScore') {
+		%= include 'parts/high-score'
+	%}
+		
         <div class="row">
                 <div class="col-md-4">
                 </div>

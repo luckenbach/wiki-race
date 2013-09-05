@@ -22,6 +22,10 @@ sub startup {
 
 	$r->post('/startChallenge')->to('core#startChallenge');
 	
+	$r->get('/shareChallenge/:caf_id')->to('core#startChallenge');
+	
+	$r->post('/HighScore')->to('core#setHighScore');
+	
 	$r->get('/reset' => sub {
 		my $self = shift;
 		$self->session(expires => 1);

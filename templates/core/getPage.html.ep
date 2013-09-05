@@ -37,7 +37,9 @@
 			<%== $wiki_data %>
 			</div>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-2">
+		<a href="/shareChallenge/<%= session 'CAF' %>">Challenge a Friend</a>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">
