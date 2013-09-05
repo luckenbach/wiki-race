@@ -2,12 +2,40 @@
 %= include 'parts/default-nav'
 
 <div class="container">
-	<div class="starter-template">
-        	<h1>Welcome to Wiki Races</h1>
-	        <p class="lead">This is a game where you attempt to get from one Wikipedia page to another in the least amount of clicked links <br> Links in <font style="color:red">red</font> are external. You will be given 10 seconds to review your destination page and gleam as much information possible before being forwarded to your starting page.</p>
-		<p class="text-center text-primary">Good Luck!!!</p>
-		<form name="start" method="POST" action="/">
-			<button type="submit" class="btn btn-primary">Start</button>
-		</form>
-	</div>
-</div>
+      <div class="jumbotron">
+        <h1>Wiki Race</h1>
+        <p class="lead">This is a game where you attempt to get from one Wikipedia page to another in the least amount of clicked links <br> Links in <font style="color:red">red</font> are external. You will be given 10 seconds to review your destination page and gleam as much information possible before being forwarded to your starting page.</p>
+ 	<form class="text-center form-inline" name="start" method="POST" action="/">
+       		<button type="submit" class="btn btn-lg btn-success">Start</button>
+		 <div class="checkbox">
+    			<label>
+      				<input type="checkbox" name="Insane" value="1"> Sheldon Mode</input>
+    			</label>
+  		</div>	
+ 
+        </form>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-6">
+          <h4>What is Wiki Race?</h4>
+          <p>A game in which you transverse Wikipedia by only using the links provided by the pages</p>
+
+          <h4>What does it run on?</h4>
+          <p>Perl, Mojolicious, Hypnotoad, Mongodb, AWS, Nginx, Linux</p>
+
+          <h4>Can I request a feature?</h4>
+          <p>Working on an "offical" method but feel free to email me</p>
+        </div>
+
+        <div class="col-lg-6">
+          <h4>What is Sheldon mode?</h4>
+          <p>Sheldon mode will pull two total random pages from Wikipedia... Not always successful </p>
+
+          <h4>Challenge a Friend!</h4>
+          <p>Challenge your buddy via the "Challenge a Friend" link on the nav bar</p>
+
+          <h4>Contact</h4>
+          <p>luckenbach @ gmail.com</p>
+        </div>
+      </div>
