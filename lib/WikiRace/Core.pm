@@ -98,6 +98,29 @@ sub getPage {
 		$self->render(wiki_data => $wiki_data, count => $count);
 	}
 }
+
+sub getWLink {
+	my $self = shift;
+	my $count = $self->session('count');
+	my $start = $self->session('start');
+	my $finish = $self->session('finish');
+	my $finish_title = $self->session('finish_title');
+	my $page_title = $self->param('wikiPage');
+	$log->info("Start : $start - Fin : $finish_title - Current : $page_title");
+	$page_title =~ s/\ /_/g;
+	my $page = $ua->get("http://en.wikipedia.org/w/index.php?title=$page_title")->res->dom;
+	my $wiki_data = $page->at('div#content.mw-body');
+	$wiki_data =~ s/\/wiki\//\/getPage\//g;
+	$wiki_data =~ s/Jump to:.*//g;
+	$count++;
+	$self->session( count => $count);
+	$self->render(template => 'core/getPage', wiki_data => $wiki_data, count => $count);
+}
+
+
+
+
+
 sub startChallenge {
 	my $start; 
 	my $finish;
@@ -146,7 +169,7 @@ sub setHighScore {
 	my $auth = $self->session('HighScore');
 	if($self->session('HighScore')) {
 		my $score_string = "$user:$count:$crumbs";
-		$records->update({ "start" => "$start", "finish" => "$finish" }, {'$push' => { 'HighScore' => $score_string}});
+		$records->update({ "start" => "$start", "finish" => "$finish" }, {'$push' => { 'HighScore' => $score_string}, 'Score' => $count});
 
 		$self->render( user => $user, start => $start, finish => $finish, count => $count ); 
 	} else {
