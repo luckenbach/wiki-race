@@ -149,10 +149,10 @@ sub startChallenge {
 	$self->session( finish_title => $finish_title);
         my $page = $ua->get("http://en.wikipedia.org/wiki/$finish_title")->res->dom;
         my $wiki_data = $page->at('div#content.mw-body');
-	$records->update({ "start" => "$start", "finish" => "$finish" }, { "start" => "$start", "finish" => "$finish" }, {"upsert" => 1});
-        my $insert_hash = $records->insert({ "start" => "$start", "finish" => "$finish" });
-        $records->update({ "start" => "$start", "finish" => "$finish" }, {'$inc' => { 'count' => 1}});
-        my $CAF = $insert_hash->{'value'};
+	$records->update({ "start" => "$start", "finish" => "$finish" }, {'$inc' => { 'count' => 1}},{ "start" => "$start", "finish" => "$finish" }, {"upsert" => 1});
+	my $id = $records->find({ "start" => "$start", "finish" => "$finish" }, { '_id' => 1});
+	my $id_doc = $id->next;
+        my $CAF = $id_doc->{'value'};
         $self->session( CAF => $CAF );
         $self->render(wiki_data => $wiki_data, start => $start, finish => $finish, start_title => $start_title);
 
