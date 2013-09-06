@@ -169,7 +169,7 @@ sub setHighScore {
 	my $auth = $self->session('HighScore');
 	if($self->session('HighScore')) {
 		my $score_string = "$user:$count:$crumbs";
-		$records->update({ "start" => "$start", "finish" => "$finish" }, {'$push' => { 'HighScore' => $score_string}, 'Score' => $count});
+		$records->update({ "start" => "$start", "finish" => "$finish" }, {'$push' => { 'HighScore' => $score_string}});
 
 		$self->render( user => $user, start => $start, finish => $finish, count => $count ); 
 	} else {
