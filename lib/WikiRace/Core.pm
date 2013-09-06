@@ -40,9 +40,18 @@ sub start {
 		$start = $start_doc->{'Title'};
 		$finish = $finish_doc->{'Title'};
 	};
-	my $insert_hash = $records->insert({ "start" => "$start", "finish" => "$finish" });
-	my $CAF = $insert_hash->{'value'};
-	$records->update({ _id => MongoDB::OID->new(value=>$CAF) }, {'$inc' => { 'count' => 1}});
+	# Search to see if the pair already exists
+	my $search_query = $records->find({ "start" => "$start", "finish" => "$finish" });
+	my $CAF;
+	if(my $search_doc = $search_query->next) {
+        	$CAF = $search_doc->{'_id'}->{'value'};
+        	$self->session( CAF => $CAF );
+		$records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$inc' => { 'count' => 1}});
+	} else {
+		my $insert_hash = $records->insert({ "start" => "$start", "finish" => "$finish" });
+		 $CAF = $insert_hash->{'value'};
+		$records->update({ _id => MongoDB::OID->new(value=>$CAF) }, {'$inc' => { 'count' => 1}});
+	}
 	$self->session( CAF => $CAF );
         $self->session( start => $start );
         $self->session( finish => $finish );
