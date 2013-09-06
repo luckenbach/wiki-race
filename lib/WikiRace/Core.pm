@@ -33,8 +33,10 @@ sub start {
 		$log->info("We have a crazy one... went full sheldon");
 	} else {
 		my $article_count = $articles->count();
+		srand();
 		my $rand1 = int(rand($article_count));
 		my $rand2 = int(rand($article_count));
+		$log->info("$rand1 : $rand2");
 		my $start_doc = $articles->find()->limit('-1')->skip($rand1)->next();
 		my $finish_doc = $articles->find()->limit('-1')->skip($rand2)->next();
 		$start = $start_doc->{'Title'};
