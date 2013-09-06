@@ -189,8 +189,13 @@ sub setHighScore {
 	my $auth = $self->session('HighScore');
 	my $CAF = $self->session('CAF');
 	if($self->session('HighScore')) {
-		my $score_string = "$user:$count:$crumbs";
-		$records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$push' => { 'HighScore' => $score_string}});
+		my %h = ();
+		my $highscore_hash = {
+				'User' 	=> $user, 
+				'Count' => $count, 
+				'Path'	=> $crumbs
+		};
+		$records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$push' => { 'HighScore' => $highscore_hash }});
 		$records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$set' => {'Score' => $count}});
 		$self->render( user => $user, start => $start, finish => $finish, count => $count ); 
 	} else {
