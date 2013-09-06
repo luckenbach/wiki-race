@@ -19,6 +19,7 @@ sub start {
 	# on the start page set current count to 0 (due to replay);
 	$self->session('count' => '0');
 	$self->session('bread_crumb' => '');
+	$self->session('HighScore' => '');
 	my $start; 
 	my $finish;
 	if($self->param('Insane')) {
@@ -40,8 +41,8 @@ sub start {
 		$finish = $finish_doc->{'Title'};
 	};
 	my $insert_hash = $records->insert({ "start" => "$start", "finish" => "$finish" });
-	$records->update({ "start" => "$start", "finish" => "$finish" }, {'$inc' => { 'count' => 1}});
 	my $CAF = $insert_hash->{'value'};
+	$records->update({ _id => MongoDB::OID->new(value=>$CAF) }, {'$inc' => { 'count' => 1}});
 	$self->session( CAF => $CAF );
         $self->session( start => $start );
         $self->session( finish => $finish );
@@ -66,9 +67,12 @@ sub getPage {
 	my $finish_title = $self->session('finish_title');
 	my $page_title = $self->param('wikiPage');
 	my $crumb = $self->session('bread_crumb');
+	my $CAF = $self->session('CAF');
 	$log->info("Start : $start - Fin : $finish_title - Current : $page_title");
 	if($page_title eq $finish_title) {
-		my $current_score = $records->find({ "start" => "$start", "finish" => "$finish" }, { score => 1});
+		my $cscore_query = $records->find({ _id => MongoDB::OID->new(value=>$CAF)}, { score => 1});
+		my $current_score = $cscore_query->next->{'Score'} || "100000";
+		$log->info("curret :$count High :$current_score");
 		if($count < $current_score) { 
 			$self->session('HighScore' => '1');
 			$self->session('count' => $count);
@@ -149,13 +153,13 @@ sub startChallenge {
 	$self->session( finish_title => $finish_title);
         my $page = $ua->get("http://en.wikipedia.org/wiki/$finish_title")->res->dom;
         my $wiki_data = $page->at('div#content.mw-body');
-	$records->update({ "start" => "$start", "finish" => "$finish" }, { "start" => "$start", "finish" => "$finish" }, {'$inc' => { 'count' => 1}}, {"upsert" => 1});
+	$records->update({ "start" => "$start", "finish" => "$finish" },{'$inc' => { 'count' => 1}}, {"upsert" => 1});
 	my $id = $records->find({ "start" => "$start", "finish" => "$finish" });
 	my $CAF;
 	if(my $id_doc = $id->next) {
         	$CAF = $id_doc->{'_id'}->{'value'};
         	$self->session( CAF => $CAF );
-		$records->update({ "start" => "$start", "finish" => "$finish" }, {'$inc' => { 'count' => 1}});
+		$records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$inc' => { 'count' => 1}});
 	} else {
 		my $insert_return = $records->insert({ "start" => "$start", "finish" => "$finish" });
 		$CAF = $insert_return->{'value'};
@@ -172,10 +176,11 @@ sub setHighScore {
 	my $crumbs = $self->session('bread_crumb');
 	my $count = $self->session('count');
 	my $auth = $self->session('HighScore');
+	my $CAF = $self->session('CAF');
 	if($self->session('HighScore')) {
 		my $score_string = "$user:$count:$crumbs";
-		$records->update({ "start" => "$start", "finish" => "$finish" }, {'$push' => { 'HighScore' => $score_string}});
-		$records->update({ "start" => "$start", "finish" => "$finish" }, {'$set' => {'count' => $count}});
+		$records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$push' => { 'HighScore' => $score_string}});
+		$records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$set' => {'Score' => $count}});
 		$self->render( user => $user, start => $start, finish => $finish, count => $count ); 
 	} else {
 		$self->render(text => "You shouldnt be here");
