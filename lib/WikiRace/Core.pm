@@ -152,7 +152,8 @@ sub startChallenge {
 	$records->update({ "start" => "$start", "finish" => "$finish" }, {'$inc' => { 'count' => 1}},{ "start" => "$start", "finish" => "$finish" }, {"upsert" => 1});
 	my $id = $records->find({ "start" => "$start", "finish" => "$finish" }, { '_id' => 1});
 	my $id_doc = $id->next;
-        my $CAF = $id_doc->{'value'};
+        my $CAF = $id_doc->{'_id'}->{'value'};
+	$log->info(Dumper($id_doc));
         $self->session( CAF => $CAF );
         $self->render(wiki_data => $wiki_data, start => $start, finish => $finish, start_title => $start_title);
 
