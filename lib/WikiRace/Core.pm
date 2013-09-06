@@ -112,7 +112,6 @@ sub getWLink {
 	my $wiki_data = $page->at('div#content.mw-body');
 	$wiki_data =~ s/\/wiki\//\/getPage\//g;
 	$wiki_data =~ s/Jump to:.*//g;
-	$count++;
 	$self->session( count => $count);
 	$self->render(template => 'core/getPage', wiki_data => $wiki_data, count => $count);
 }
@@ -170,11 +169,10 @@ sub setHighScore {
 	if($self->session('HighScore')) {
 		my $score_string = "$user:$count:$crumbs";
 		$records->update({ "start" => "$start", "finish" => "$finish" }, {'$push' => { 'HighScore' => $score_string}});
-
+		$records->update({ "start" => "$start", "finish" => "$finish" }, {'$set' => {'count' => $count}});
 		$self->render( user => $user, start => $start, finish => $finish, count => $count ); 
 	} else {
 		$self->render(text => "You shouldnt be here");
-		$log->info("Setting score");
 	}
 
 
