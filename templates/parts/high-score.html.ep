@@ -9,7 +9,10 @@
                         <fieldset>
                         <div class="form-group">
                                 <label for="User" class="sr-only">Starting Page</label>
-                                <input name="User" id="start" placeholder="Initals">
+                                <input name="User" id="start" placeholder="Initals" required>
+
+
+
                         </div>
 
         </form>
@@ -26,3 +29,7 @@
                 </div>
         </div>
 
+<script type="text/Javascript">
+<script>
+$("#HighScore").validate();
+</script>

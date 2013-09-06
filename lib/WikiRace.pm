@@ -17,6 +17,7 @@ sub startup {
 	$r->post('/')->to('core#start');
 	
 	$r->get('/getPage/*wikiPage')->to('core#getPage');
+	
 	$r->get('/getWLink/*wikiPage')->to('core#getWLink');
 
 	$r->get('/challenge')->to('core#challenge');

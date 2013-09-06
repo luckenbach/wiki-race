@@ -161,7 +161,7 @@ sub startChallenge {
 
 sub setHighScore {
 	my $self = shift;
-	my $user = $self->param('User');
+	my $user = $self->param('User')|| "Anon";
 	my $start = $self->session('start');
 	my $finish = $self->session('finish');
 	my $crumbs = $self->session('bread_crumb');
