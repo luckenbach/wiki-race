@@ -149,14 +149,19 @@ sub startChallenge {
 	$self->session( finish_title => $finish_title);
         my $page = $ua->get("http://en.wikipedia.org/wiki/$finish_title")->res->dom;
         my $wiki_data = $page->at('div#content.mw-body');
-	$records->update({ "start" => "$start", "finish" => "$finish" }, {'$inc' => { 'count' => 1}},{ "start" => "$start", "finish" => "$finish" }, {"upsert" => 1});
-	my $id = $records->find({ "start" => "$start", "finish" => "$finish" }, { '_id' => 1});
-	my $id_doc = $id->next;
-        my $CAF = $id_doc->{'_id'}->{'value'};
-	$log->info(Dumper($id_doc));
-        $self->session( CAF => $CAF );
+	$records->update({ "start" => "$start", "finish" => "$finish" }, { "start" => "$start", "finish" => "$finish" }, {'$inc' => { 'count' => 1}}, {"upsert" => 1});
+	my $id = $records->find({ "start" => "$start", "finish" => "$finish" });
+	my $CAF;
+	if(my $id_doc = $id->next) {
+        	$CAF = $id_doc->{'_id'}->{'value'};
+        	$self->session( CAF => $CAF );
+		$records->update({ "start" => "$start", "finish" => "$finish" }, {'$inc' => { 'count' => 1}});
+	} else {
+		my $insert_return = $records->insert({ "start" => "$start", "finish" => "$finish" });
+		$CAF = $insert_return->{'value'};
+        	$self->session( CAF => $CAF );
+	}
         $self->render(wiki_data => $wiki_data, start => $start, finish => $finish, start_title => $start_title);
-
 }
 
 sub setHighScore {
