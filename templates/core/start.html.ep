@@ -1,5 +1,4 @@
 % layout 'default';
-%= include 'parts/default-nav'
 <div class="content">
 	<div class="row">
 		<div class="col-md-1">

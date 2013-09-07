@@ -1,5 +1,4 @@
 % layout 'default';
-%= include 'parts/default-nav'
 %= javascript '/assets/js/jquery.dataTables.min.js'
 
 <div class="content">
