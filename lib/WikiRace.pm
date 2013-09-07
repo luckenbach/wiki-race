@@ -1,5 +1,7 @@
 package WikiRace;
+use Helper;
 use Mojo::Base 'Mojolicious';
+use Mojolicious::Plugin::Bcrypt;
 
 # This method will run once at server start
 sub startup {
@@ -7,6 +9,12 @@ sub startup {
 
 	# Documentation browser under "/perldoc"
 	$self->plugin('PODRenderer');
+	
+	# Define the Secret
+	$self->secret('f0x3a|23|)@55h0l3');
+
+	# Setup Password crypt
+	$self->plugin('bcrypt', { cost => 6});
 
 	# Router
 	my $r = $self->routes;
@@ -37,7 +45,63 @@ sub startup {
 		$self->session(expires => 1);
 		$self->redirect_to('/');
 	});
+
+	$r->post('/register')->to('account#register');
 	
+	$r->get('/login')->to('auth#login', user_id => '');
+
+	$r->post('/login' => sub {
+		my $self = shift;
+		
+		my $address = $self->tx->remote_address;
+
+		my $email 	= $self->param('email') || '';
+		my $pass	= $self->param('pass') || '';
+		my $res		= $users->find({ email => $email});
+		my $count	= $res->count();
+	
+		unless( $count == 1) {
+			$self->flash( error =>  "Error logging in" );
+			$log->warn("Some how we got more than one user with email address $email");
+			return $self->redirect_to('/login');
+		}
+
+		my $doc 	= $res->next;
+		my $user_id 	= $doc->{'_id'}->to_string;
+		my $username 	= $doc->{"username"};
+		
+
+		unless($self->bcrypt_validate($pass, $doc->{"pass"})) {
+			$self->flash(error => "error logging in");
+			$self->warn("failed attempt to login for $username from $address");
+			return $self->redirect_to('/login');
+		}
+
+		$self->session( user_id 	=> $user_id );
+		$self->session( username 	=> $username );
+		$log->info("$username has logged in from $address");
+		$self->redirect_to('/');
+	} => 'auth/login');
+
+
+	my $logged_in = $r->under( sub {
+		my $self = shift;
+
+		return 1 if $self->session('user_id');
+		$self->redirect_to('/login');
+		return undef;
+	});
+
+	$logged_in->get('/profile')->to('account#profile');
+
+
+	$logged_in->get('/logout' => sub {
+		my $self = shift;
+		$self->session(expires => 1);
+		$self->redirect_to('/');
+	});
+
+
 }
 
 1;

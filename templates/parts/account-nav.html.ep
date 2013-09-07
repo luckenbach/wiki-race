@@ -15,9 +15,11 @@
 				<li><a href="#about">About</a></li>
 				<li><a href="#contact">Contact</a></li>
 				<li><a href="/Records">Records/HighScores</a></li>
+				<li><a href="/profile">Welcome <%= session 'username' %></a></li>
+				<li><a href="/logout">Logout</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/reset">Reset</a></li>
+				<li><button href="/rest" " class="btn btn-danger">RESET</button></li>
 			</ul>
         </div><!--/.nav-collapse -->
       </div>

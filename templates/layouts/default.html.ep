@@ -20,7 +20,11 @@ body {
   text-align: center;
 }
 </style>
-
+		% if (session 'user_id') {
+			%= include 'parts/account-nav'
+		% } else {
+			%= include 'parts/standard-nav'
+		% }
 <script src="/assets/js/jquery.js"></script>
 <script src="/assets/js/jquery.validate.min.js"></script>
   </head>
@@ -34,4 +38,3 @@ body {
 
 	</body>
 </html>
-

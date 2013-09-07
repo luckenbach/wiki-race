@@ -1,5 +1,4 @@
 % layout 'default';
-%= include 'parts/default-nav'
 
 <div class="container">
       <div class="jumbotron">
