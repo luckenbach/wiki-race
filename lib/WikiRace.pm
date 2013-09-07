@@ -26,7 +26,11 @@ sub startup {
 	
 	$r->get('/shareChallenge/:caf_id')->to('core#startChallenge');
 	
+	$r->get('/GetHighScore')->to('highscore#getHighScore');
+ 
 	$r->post('/HighScore')->to('core#setHighScore');
+	
+	$r->get('/Records')->to('highscore#records');
 	
 	$r->get('/reset' => sub {
 		my $self = shift;

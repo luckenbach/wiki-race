@@ -1,0 +1,17 @@
+% layout 'default';
+%= include 'parts/default-nav'
+<div class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="text-center text-success"><b>HighScores & Records</b></h1>
+		</div>
+	</div>
+        <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                </div>
+        </div>
+</div>

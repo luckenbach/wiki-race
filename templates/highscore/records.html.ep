@@ -1,0 +1,52 @@
+% layout 'default';
+%= include 'parts/default-nav'
+%= javascript '/assets/js/jquery.dataTables.min.js'
+
+<div class="content">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="text-center text-success"><b>Highscores & Records</b></h1>
+		</div>
+	</div>
+        <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-8">
+			<table cellpadding="0" cellspacing="0" border="0" class="table" style="width: 50%" id="stats">
+			    <thead>
+				<tr>
+				    <th>Name</th>
+				    <th>Start</th>
+				    <th>Finish</th>
+				    <th>Count</th>
+				    <th>Path</th>
+				</tr>
+			    </thead>
+			    <tbody></tbody>
+			</table>
+                </div>
+                <div class="col-lg-2">
+                </div>
+        </div>
+</div>
+<script>
+   $(document).ready(function() {
+    var anOpen = [];
+    var oTable = $('#stats').dataTable( {
+        "bPaginate": false,
+        "bProcessing": true,
+        "sScrollY": "500px",
+        "sAjaxSource": "/GetHighScore/",
+        "sServerMethod": "GET",
+        "sDom": "<'row'<'span6'l><'span6'>r>t<'row'<'span6'><'span6'p>>",
+        "aoColumns": [
+            { "mDataProp": "User" },
+            { "mDataProp": "Start" },
+            { "mDataProp": "Finish" },
+            { "mDataProp": "Count" },
+            { "mDataProp": "Path" }
+        ],
+        "aaSorting": [[ 1, "desc" ]],
+    } )
+});
+</script>
