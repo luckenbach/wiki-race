@@ -160,7 +160,7 @@ sub startChallenge {
 
 	};
 	if(($start eq "") && ($finish eq "")) {
-		$self->redirect_to('/challenge');
+		 return $self->redirect_to('/challenge');
 	}
 	$log->info("CAF start : $start - finish : $finish");
         $self->session( start => $start );

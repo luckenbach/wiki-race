@@ -93,7 +93,7 @@ sub update {
 	my $new_email   	= $self->param('email') || $doc->{'email'};;
 	my $new_pass     	= $self->param('new_pass');
 	my $new_pass2    	= $self->param('new_pass2');
-	$log->warn("$new_pass $email");
+	$log->warn("$new_pass $new_email");
 	if(($new_pass eq "") && ($new_pass2 eq "")) {
 		$self->flash(error => "Password fields blank :-/");
 		$self->redirect_to('/account');
