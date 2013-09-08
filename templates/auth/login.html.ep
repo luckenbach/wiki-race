@@ -1,0 +1,182 @@
+% layout 'default';
+<style>
+.centered{
+    float: none;
+    margin: 0 auto;
+}
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="text"], .form-signin input[type="password"] {
+    margin-bottom: 10px;
+}
+.form-signin label {
+    font-weight: normal;
+}
+.error {
+    color: #b94a48;
+}
+</style>
+<div class="container">
+		% if (my $msg = flash 'error') {
+			<div class="row">
+				<div class="col-lg-2">
+				</div>
+				<div class="col-lg-5">
+					<div class="alert alert-danger">
+						%= $msg
+					</div>
+				</div>
+				<div class="col-lg-2">
+				</div>
+			</div>
+		% }
+	<div class="row">
+		<div class="col-lg-2">
+		</div>
+		<div class="col-lg-5">
+			<div class="tabbable">
+			    <ul class="nav nav-tabs">
+				<li class="active"> <a href="#Login" data-toggle="tab">Login</a>
+				</li>
+				<li> <a href="#Register" data-toggle="tab">Register</a>
+				</li>
+			    </ul>
+			    <div class="tab-content">
+				<div class="tab-pane active" id="Login">
+				    <form method="POST" id="form-signin" action="/login" class="form-signin">
+						 <h2 class="form-signin-heading">Please sign in</h2>
+
+						<div class="control-group">
+						    <label class="control-label" for="user">Email:</label>
+						    <div class="controls">
+							<input size="50" name="email" id="email" value="" type="text" class="form-control" placeholder="Login">
+						    </div>
+						</div>
+						<div class="control-group">
+						    <label class="control-label" for="pass">Password:</label>
+						    <div class="controls">
+							<input size="50" name="pass" id="pass" value="" type="password" class="form-control" placeholder="Password">
+						    </div>
+						</div>
+						<label class="checkbox">
+						<button name="submit" id="submit" value="" type="submit" class="btn btn-large btn-primary btn-block">Sign in</button>
+				  </form>
+				</div>
+				<div class="tab-pane" id="Register">
+                                    <form method="POST" id="form-register" action="/register" class="form-signin">
+                                                 <h2 class="form-signin-heading">Registration</h2>
+
+                                                <div class="control-group">
+                                                    <label class="control-label" for="username">Username:</label>
+                                                    <div class="controls">
+                                                        <input size="50" name="username" id="username" value="" type="text" class="form-control" placeholder="Sheldor the Conqueror">
+                                                    </div>
+                                                </div>
+						<div class="control-group">
+                                                    <label class="control-label" for="email">Email:</label>
+                                                    <div class="controls">
+                                                        <input size="50" name="email" id="email" value="" type="text" class="form-control" placeholder="scooper@caltech.edu">
+                                                    </div>
+                                                </div>
+
+                                                <div class="control-group">
+                                                    <label class="control-label" for="password">Password:</label>
+                                                    <div class="controls">
+                                                        <input size="50" name="pass" id="pass" value="" type="password" class="form-control" placeholder="Bazinga">
+                                                    </div>
+                                                </div>
+						<div class="control-group">
+                                                    <label class="control-label" for="pass2">Repeat Password:</label>
+                                                    <div class="controls">
+                                                        <input size="50" name="pass2" id="pass2" value="" type="password" class="form-control" placeholder="Bazinga (again)">
+                                                    </div>
+                                                </div>
+
+                                                <button name="submit" id="submit" value="" type="submit" class="btn btn-large btn-success btn-block">Register</button>
+                                  </form>
+
+				</div>
+			    </div>
+			</div>
+		</div>
+		<div class="col-lg-2">
+		</div>                
+	</div>
+</div>
+<script type="text/Javascript">
+$(document).ready(function () {
+    jQuery.validator.addMethod("lettersonly", function (value, element) {
+        return this.optional(element) || /^[a-z0-9_-]+$/i.test(value);
+    }, "Please use only a-z0-9_-");
+    $('#form-signin').validate({
+        rules: {
+            login: {
+                minlength: 3,
+                maxlength: 15,
+                required: true,
+                lettersonly: true
+            },
+            password: {
+                minlength: 3,
+                maxlength: 15,
+                required: true
+            },
+        },
+        highlight: function (element) {
+            $(element).closest('.control-group').addClass('has-error');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.control-group').addClass('has-success');
+        },
+
+    });
+
+    $('#form-register').validate({
+        rules: {
+            login: {
+                minlength: 3,
+                maxlength: 15,
+                required: true,
+                lettersonly: true
+            },
+            password: {
+                minlength: 3,
+                maxlength: 15,
+                required: true
+            },
+        },
+        highlight: function (element) {
+            $(element).closest('.control-group').addClass('has-error');
+	},
+	unhighlight: function (element) {
+	    $(element).closest('.control-group').addClass('has-success');
+        },
+    });
+
+
+
+
+
+});
+$(function() {
+	var url = document.location.toString();
+	if (url.match('#')) {
+    		$('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+	};
+});
+</script>
