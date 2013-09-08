@@ -31,6 +31,7 @@ sub start {
 		$start       = $pages->{query}->{random}->[0]->{'title'};
 		$finish      = $pages->{query}->{random}->[1]->{'title'};
 		$log->info("We have a crazy one... went full sheldon");
+		$self->session('Insane' => 1);
 	} else {
 		my $article_count = $articles->count();
 		srand();
@@ -192,6 +193,7 @@ sub setHighScore {
 	my $count = $self->session('count');
 	my $auth = $self->session('HighScore');
 	my $CAF = $self->session('CAF');
+	my $Sheldon = $self->session('Insane') || "0";
 	if($self->session('HighScore')) {
 		my %h = ();
 		my $highscore_hash = {

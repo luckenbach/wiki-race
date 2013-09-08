@@ -42,7 +42,12 @@ sub startup {
 	
 	$r->get('/reset' => sub {
 		my $self = shift;
-		$self->session(expires => 1);
+		delete $self->session->{'start'};
+		delete $self->session->{'finish'};
+		delete $self->session->{'CAF'};
+		delete $self->session->{'finish_title'};
+		delete $self->session->{'count'};
+		delete $self->session->{'bread_crumb'};
 		$self->redirect_to('/');
 	});
 

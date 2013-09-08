@@ -16,7 +16,7 @@
 				<li><a href="/login">Login</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-					<li><button href="/rest" " class="btn navbar-btn btn-small btn-danger">RESET</button></li>
+				<li><button OnClick="window.location='/reset';" class="btn btn-danger navbar-btn">Reset<span class="glyphicon white glyphicon-fire"></span></button></li>
 			</ul>
         </div><!--/.nav-collapse -->
       </div>
