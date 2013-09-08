@@ -68,7 +68,6 @@ sub update_account {
 	my %user_details;
 
 	my $id    = MongoDB::OID->new( value => $self->session('user_id') );
-	$log->info("$id");
 
 	my $user = $users->find({ _id => $id });
 	if (my $doc = $user->next) {
@@ -94,6 +93,7 @@ sub update {
 	my $new_email   	= $self->param('email') || $doc->{'email'};;
 	my $new_pass     	= $self->param('new_pass');
 	my $new_pass2    	= $self->param('new_pass2');
+	$log->warn("$new_pass $email");
 	if(($new_pass eq "") && ($new_pass2 eq "")) {
 		$self->flash(error => "Password fields blank :-/");
 		$self->redirect_to('/account');
