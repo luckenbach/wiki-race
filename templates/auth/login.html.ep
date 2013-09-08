@@ -107,7 +107,7 @@
                                                     </div>
                                                 </div>
 
-                                                <buttmn name="submit" id="submit" value="" type="submit" class="btn btn-large btn-success btn-block">Register</button>
+                                                <button name="submit" id="submit" value="" type="submit" class="btn btn-large btn-success btn-block">Register</button>
                                   </form>
 
                                 </div>
