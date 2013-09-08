@@ -81,6 +81,7 @@ sub getPage {
 	my $CAF = $self->session('CAF');
 	$log->info("Start : $start - Fin : $finish_title - Current : $page_title");
 	if($page_title eq $finish_title) {
+		$crumb = $crumb . "->$page_title";
 		my $cscore_query = $records->find({ _id => MongoDB::OID->new(value=>$CAF)}, { score => 1});
 		my $current_score = $cscore_query->next->{'Score'} || "100000";
 		$log->info("curret :$count High :$current_score");
@@ -93,6 +94,9 @@ sub getPage {
 		}
                 $self->render(count => $count, template => 'core/victory');
         } else {
+		if($count % 5) {
+			$self->flash('hint' => '1');
+		}
 		if($crumb) {
 			$crumb = $crumb . "->$page_title";
 			$crumb =~ s/_/ /g;
@@ -200,9 +204,10 @@ sub setHighScore {
 		$records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$push' => { 'HighScore' => $highscore_hash }});
 		$records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$set' => {'Score' => $count}});
 		$users->update({ username => "$user" }, {'$push' => { 'Records_Set' => $highscore_hash }});
+		delete $self->session->{'HighScore'};
 		$self->render( user => $user, start => $start, finish => $finish, count => $count ); 
 	} else {
-		$self->render(text => "You shouldnt be here");
+		$self->redirect_to("/");
 	}
 
 
