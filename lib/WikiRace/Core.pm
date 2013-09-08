@@ -126,7 +126,7 @@ sub getWLink {
 	my $finish = $self->session('finish');
 	my $finish_title = $self->session('finish_title');
 	my $page_title = $self->param('wikiPage');
-	$log->info("Start : $start - Fin : $finish_title - Current : $page_title");
+	$log->info("wlink Start : $start - Fin : $finish_title - Current : $page_title");
 	$page_title =~ s/\ /_/g;
 	my $page = $ua->get("http://en.wikipedia.org/w/index.php?title=$page_title")->res->dom;
 	my $wiki_data = $page->at('div#content.mw-body');
