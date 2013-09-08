@@ -70,7 +70,7 @@
                                                 <button name="submit" id="submit" value="" type="submit" class="btn btn-large btn-success">Update</button>
 
                                   </form>
-		<\div>
-	<\div>
+		</div>
+	</div>
 
 </div>
