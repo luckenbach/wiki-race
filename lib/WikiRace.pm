@@ -80,7 +80,7 @@ sub startup {
 
 		unless($self->bcrypt_validate($pass, $doc->{"pass"})) {
 			$self->flash(error => "error logging in");
-			$self->warn("failed attempt to login for $username from $address");
+			$log->warn("failed attempt to login for $username from $address");
 			return $self->redirect_to('/login');
 		}
 
