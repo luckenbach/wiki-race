@@ -18,7 +18,7 @@
 				<li class="active"><a href="/">Home</a></li>
 				<li><a href="/challenge">Challenge a Friend</a></li>
 				<li><a href="/Records">Records/HighScores</a></li>
-				<li><a href="/profile">Welcome <%= session 'username' %></a></li>
+				<li><a href="/account">Welcome <%= session 'username' %></a></li>
 				<li><a href="/logout">Logout</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

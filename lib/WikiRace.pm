@@ -97,7 +97,7 @@ sub startup {
 		return undef;
 	});
 
-	$logged_in->get('/profile')->to('account#profile');
+	$logged_in->get('/account')->to('account#account');
 
 
 	$logged_in->get('/logout' => sub {
@@ -105,7 +105,8 @@ sub startup {
 		$self->session(expires => 1);
 		$self->redirect_to('/');
 	});
-
+	
+	$logged_in->post('/update')->to('account#update');
 
 }
 
