@@ -159,7 +159,10 @@ sub startChallenge {
 		$finish = $self->param('finish');
 
 	};
-	$log->info("start : $start - finish : $finish");
+	if(($start eq "") && ($finish eq "")) {
+		$self->redirect_to('/challenge');
+	}
+	$log->info("CAF start : $start - finish : $finish");
         $self->session( start => $start );
         $self->session( finish => $finish );
         my $finish_title = $finish;
