@@ -9,7 +9,11 @@
                         <fieldset>
                         <div class="form-group">
                                 <label for="User" class="sr-only">Starting Page</label>
-                                <input name="User" id="start" placeholder="Initals" required>
+					% if (session 'user_id') {
+                                		<input name="User" id="start" value="<%= session 'username' %>"required>
+					% } else {
+                                		<input name="User" id="start" placeholder="Initals" required>
+					% }
 
 
 

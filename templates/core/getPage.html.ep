@@ -42,6 +42,12 @@
 	</div>
 </div>
 <script type="text/javascript">
+	$('a.external.text[href^="//en.wikipedia.org/w/"]').each(function() { 
+	    var $this = $(this),
+	    aHref = $this.attr('href');  //get the value of an attribute 'href'
+	    $this.attr('href', aHref.replace('//en.wikipedia.org/w/index.php?title=','/getWLink/')); //set the value of an attribute 'href'
+	    $this.removeClass('external text');
+	});
 	$("a.external.text").attr("href", "#");
 	$("a.external.text").attr("style", "color: rgb(255,0,0)");
 	$('a[href^="/w/"]').each(function() { 

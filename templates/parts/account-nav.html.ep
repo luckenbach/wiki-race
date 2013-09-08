@@ -19,7 +19,7 @@
 				<li><a href="/logout">Logout</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><button href="/rest" " class="btn btn-danger">RESET</button></li>
+				<li><button href="/rest" " class="btn navbar-btn btn-small btn-danger">RESET</button></li>
 			</ul>
         </div><!--/.nav-collapse -->
       </div>

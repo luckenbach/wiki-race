@@ -199,6 +199,7 @@ sub setHighScore {
 		};
 		$records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$push' => { 'HighScore' => $highscore_hash }});
 		$records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$set' => {'Score' => $count}});
+		$users->update({ username => "$user" }, {'$push' => { 'Records_Set' => $highscore_hash }});
 		$self->render( user => $user, start => $start, finish => $finish, count => $count ); 
 	} else {
 		$self->render(text => "You shouldnt be here");
