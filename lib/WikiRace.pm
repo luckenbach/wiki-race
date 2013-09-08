@@ -35,6 +35,8 @@ sub startup {
 	$r->get('/shareChallenge/:caf_id')->to('core#startChallenge');
 	
 	$r->get('/GetHighScore')->to('highscore#getHighScore');
+	
+	$r->get('/personalHighScore')->to('highscore#personalHighScore');
  
 	$r->post('/HighScore')->to('core#setHighScore');
 	
@@ -105,6 +107,8 @@ sub startup {
 		$self->session(expires => 1);
 		$self->redirect_to('/');
 	});
+	
+	$logged_in->get('/update_account')->to('account#update_account');
 	
 	$logged_in->post('/update')->to('account#update');
 

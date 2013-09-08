@@ -1,0 +1,76 @@
+% layout 'default';
+
+
+
+<style>
+.centered{
+    float: none;
+    margin: 0 auto;
+}
+</style>
+<div class="content">
+		% if (my $e_msg = flash 'error') {
+			<div class="row">
+				<div class="col-lg-2">
+				</div>
+				<div class="col-lg-5">
+					<div class="alert alert-danger">
+						%= $e_msg
+					</div>
+				</div>
+				<div class="col-lg-2">
+				</div>
+			</div>
+		% }
+		% if (my $s_msg = flash 'message') {
+			<div class="row">
+				<div class="col-lg-2">
+				</div>
+				<div class="col-lg-5">
+					<div class="alert alert-success">
+						%= $s_msg
+					</div>
+				</div>
+				<div class="col-lg-2">
+				</div>
+			</div>
+		% }
+	<div class="row">
+		<div class="centered col-lg-5">
+	                <form method="POST" id="form-register" action="/update" class="form-signin">
+                                                 <h2 class="form-signin-heading">Update User Info:</h2>
+
+                                                <div class="control-group">
+                                                    <label class="control-label" for="email">Email:</label>
+                                                    <div class="controls">
+                                                        <input size="50"  name="email" id="email" type="text" class="form-control" value="<%= $user_details->{'email'}%>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="control-group">
+                                                    <label class="control-label" for="pass">Current Password:</label>
+                                                    <div class="controls">
+                                                        <input size="50" autocomplete="off" name="pass" id="pass" value="" type="password" class="form-control" placeholder="Current Password">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label" for="new_pass">New Password:</label>
+                                                    <div class="controls">
+                                                        <input size="50" name="new_pass" id="new_pass" value="" type="password" class="form-control" placeholder="New Password">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label" for="new_pass2">Repeat Password:</label>
+                                                    <div class="controls">
+                                                        <input size="50" name="new_pass2" id="new_pass2" value="" type="password" class="form-control" placeholder="Repeat">
+                                                    </div>
+                                                </div>
+                                                <br>
+
+                                                <button name="submit" id="submit" value="" type="submit" class="btn btn-large btn-success">Update</button>
+
+                                  </form>
+		<\div>
+	<\div>
+
+</div>
