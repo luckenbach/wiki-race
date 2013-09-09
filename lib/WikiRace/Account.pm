@@ -16,7 +16,7 @@ sub register {
 		return $self->redirect_to('/login#Register');
 	}
 
-	$log->info("username : $username : email $email : pass : $pass : pass2 : $pass2");
+	$log->debug("username : $username : email $email : pass : $pass : pass2 : $pass2");
 	
 
 	# search to see if email is unique before inserting
@@ -93,7 +93,7 @@ sub update {
 	my $new_email   	= $self->param('email') || $doc->{'email'};;
 	my $new_pass     	= $self->param('new_pass');
 	my $new_pass2    	= $self->param('new_pass2');
-	$log->warn("$new_pass $new_email");
+	$log->debug("$new_pass $new_email");
 	if(($new_pass eq "") && ($new_pass2 eq "")) {
 		$self->flash(error => "Password fields blank :-/");
 		$self->redirect_to('/account');
@@ -104,7 +104,7 @@ sub update {
 	} else {
 		my $new_pass = $doc->{'pass'};
 	}
-	if($new_email != $doc->{'email'}) {
+	if($new_email ne $doc->{'email'}) {
 		my $exists = $users->find({ email => $new_email })->count;
 		if ($exists > 0) {
 			$self->flash(error => "email already in use");
