@@ -74,12 +74,15 @@ sub start {
 sub getPage {
 	my $self = shift;
 	my $count = $self->session('count');
-	my $start = $self->session('start');
-	my $finish = $self->session('finish');
+	my $start = $self->session('start') || "";
+	my $finish = $self->session('finish') || "";
 	my $finish_title = $self->session('finish_title');
 	my $page_title = $self->param('wikiPage');
 	my $crumb = $self->session('bread_crumb');
 	my $CAF = $self->session('CAF');
+	if(($start eq "") && ($finish eq "")) {
+		return $self->redirect_to('/');
+	};
 	$log->info("Start : $start - Fin : $finish_title - Current : $page_title");
 	if($page_title eq $finish_title) {
 		$crumb = $crumb . "->$page_title";
