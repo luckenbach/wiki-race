@@ -5,55 +5,74 @@
 			<h1 class="text-center text-success"><b>VICTORY!!!</b></h1>
 		</div>
 	</div>
-        <div class="row">
-                <div class="col-md-4">
-                        <div class="panel panel-default">
-                                <div class="panel-heading">Starting Page:</div>
-                                <div class="panel-body"><%= session 'start' %></div>
-                        </div>
-                </div>
-                <div class="col-md-4">
-                        <div class="panel panel-default">
-                                <div class="panel-heading">Ending Page:</div>
-                                <div class="panel-body"><%= session 'finish' %></div>
-                        </div>
 
-                </div>
-                <div class="col-md-4">
-                        <div class="panel panel-default">
-                                <div class="panel-heading">Count:</div>
-                                <div class="panel-body">
-                                        <%= $count %>
-                                </div>
-                        </div>
-        </div>
-        <div class="row">
-                <div class="panel panel-default">
-                        <div class="panel-body text-center">
-                                <%= session 'bread_crumb' %>
-                        </div>
-                </div>
-        </div>
-	% if (session 'HighScore') {
-		%= include 'highscore/high-score'
-	%}
-		
-        <div class="row">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4">
-                        <div class="panel panel-default text-center">
-                                <div class="panel-heading">Play Again?</div>
-                                <div class="panel-body">
-					<form name="start" method="POST" action="/">
-						<button type="submit" class="btn btn-primary">Start</button>
-					</form>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Starting Page:
 				</div>
-                        </div>
+				<div class="panel-body">
+					<%= session 'start' %>
+				</div>
+			</div>
+		</div>
 
-                </div>
-                <div class="col-md-4">
-                </div>
-        </div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Ending Page:
+				</div>
+				<div class="panel-body">
+					<%= session 'finish' %>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Count:
+				</div>
+				<div class="panel-body">
+					<%= $count %>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-body text-center">
+				<%= session 'bread_crumb' %>
+			</div>
+		</div>
+	</div>
+
+% if (session 'HighScore') {
+%= include 'highscore/high-score'
+%}
+
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+
+		<div class="col-md-4">
+			<div class="panel panel-default text-center">
+				<div class="panel-heading">
+					Play Again?
+				</div>
+			<div class="panel-body">
+				<form name="start" method="POST" action="/">
+					<button type="submit" class="btn btn-primary">Start</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+		</div>
+	</div>
+</div>
 
 

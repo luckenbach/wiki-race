@@ -15,9 +15,8 @@
 body {
   padding-top: 50px;
 }
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
+.white, .white a {
+  color: #fff;
 }
 </style>
   </head>
