@@ -21,6 +21,8 @@ body {
 }
 </style>
   </head>
+
+	<body>
 		% if (session 'user_id') {
 			%= include 'parts/account-nav'
 		% } else {
@@ -28,7 +30,6 @@ body {
 		% }
 %= javascript '/assets/js/jquery.js'
 %= javascript '/assets/js/base.js'
-	<body>
 	
 		<%= content %>
 		<script src="/assets/js/bootstrap.min.js"></script>
