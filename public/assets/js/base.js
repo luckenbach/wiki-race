@@ -1,6 +1,6 @@
 function HighScoreModal(){
     $.ajax({
-        url: '/setHighScore',
+        url: '/setHighScore/',
         type: 'GET',
         success: function(data){
             $('#modalHolder').html(data).modal('show');

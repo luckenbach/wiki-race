@@ -3,17 +3,19 @@
   color: #fff;
 }
 </style>
+
+
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Wiki Race</a>
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/">Wiki Race</a>
 		</div>
-        <div class="collapse navbar-collapse">
+		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/">Home</a></li>
 				<li><a href="/challenge">Challenge a Friend</a></li>
@@ -24,7 +26,6 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><button OnClick="window.location='/reset';" class="btn btn-danger navbar-btn">Reset<span class="glyphicon white glyphicon-fire"></span></button></li>
 			</ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
+		</div><!--/.nav-collapse -->
+	</div>
 </div>
