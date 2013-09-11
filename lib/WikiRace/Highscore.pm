@@ -26,6 +26,9 @@ sub setHighScore {
         my $auth = $self->session('HighScore');
         my $CAF = $self->session('CAF');
         my $Sheldon = $self->session('Insane') || "0";
+	if(($user =~ m/<.+?>/) || ($user =~ m/%.?+/)) {
+		return $self->render( template => 'highscore/responce-modal', responce => '<div class="alert alert-danger"><strong>Unable to submit your highscore, please try to not use < > or html code in your name</strong></div>');
+	}
         if($self->session('HighScore')) {
                 my %h = ();
                 my $highscore_hash = {
@@ -39,7 +42,7 @@ sub setHighScore {
                 $records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$set' => {'Score' => $count}});
                 $users->update({ username => "$user" }, {'$push' => { 'Records_Set' => $highscore_hash }});
                 delete $self->session->{'HighScore'};
-                $self->render( user => $user, start => $start, finish => $finish, count => $count );
+		return $self->render( template => 'highscore/responce-modal', responce => '<div class="alert alert-success"><strong>Highscore has been updated!</strong></div>');
         } else {
                 $self->redirect_to("/");
         }

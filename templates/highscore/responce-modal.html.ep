@@ -1,0 +1,11 @@
+<div class="modal-dialog text-center">
+   <div class="modal-content">
+     <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+     </div>
+     <div class="modal-body text-center">
+	<%== $responce %>
+     <div class="modal-footer">
+     </div>
+   </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

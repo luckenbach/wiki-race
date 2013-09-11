@@ -15,11 +15,11 @@ function HighScoreModal(){
 
 function setHighScore(){
     $.ajax({
-        url: '/post_bug/',
+        url: '/setHighScore/',
         type: 'POST',
-        data: $('#feedbackForm').serialize(),
+        data: $('#HighScore').serialize(),
         success: function(data){
-            $('#modalHolder').html(data).modal('show');
+            	$('#modalHolder').html(data).modal('show');
         },
         error: function(error){
             alert('There was an error processing your feedback. The message returned by the server was: \n\n' + error.responseText);

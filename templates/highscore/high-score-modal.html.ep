@@ -1,25 +1,31 @@
-<div class="modal-dialog">
+<div class="modal-dialog text-center">
    <div class="modal-content">
      <div class="modal-header">
        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
        <h4 class="modal-title">Set Highscore!</h4>
      </div>
-     <div class="modal-body">
-               <form name="HighScore" method="POST" action="/HighScore" class="form-horizontal" role="form">
+     <div class="modal-body text-center">
+               <form name="HighScore" id="HighScore" class="form-horizontal" role="form">
                <fieldset>
                <div class="form-group">
                                % if (session 'user_id') {
-                                       <input name="User" id="start" value="<%= session 'username' %>"required>
+                                       <input name="User" id="User" value="<%= session 'username' %>"required>
                                % } else {
-                                       <input name="User" id="start" placeholder="Initals" required>
+                                       <input name="User" id="User" placeholder="Initals" required>
                                % }
                </div>
-               <button type="submit" class="btn btn-success">Submit <span class="glyphicon glyphicon-thumbs-up"></span></button>
                </fieldset>
+       			<button type="button" onclick="setHighScore();" class="btn btn-success">Submit <span class="glyphicon glyphicon-thumbs-up"></span></button>
                </form>
      </div>
      <div class="modal-footer">
-       <button type="button" onclock="setHighScore();" class="btn btn-success">Submit</button>
      </div>
    </div><!-- /.modal-content -->
  </div><!-- /.modal-dialog -->
+<script type="text/javascript">
+    $('#HighScore').submit(function(e){
+            e.preventDefault();
+            setHighScore();
+            return false;
+            });
+</script>
