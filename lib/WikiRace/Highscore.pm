@@ -6,6 +6,53 @@ use Data::Dumper;
 use Mojo::Log;
 
 
+
+
+
+sub scoreForm {
+	my $self = shift;
+	$self->render( template => 'highscore/high-score-modal' );
+
+
+}
+
+sub setHighScore {
+        my $self = shift;
+        my $user = $self->param('User')|| "Anon";
+        my $start = $self->session('start');
+        my $finish = $self->session('finish');
+        my $crumbs = $self->session('bread_crumb');
+        my $count = $self->session('count');
+        my $auth = $self->session('HighScore');
+        my $CAF = $self->session('CAF');
+        my $Sheldon = $self->session('Insane') || "0";
+        if($self->session('HighScore')) {
+                my %h = ();
+                my $highscore_hash = {
+                                'User'          => $user,
+                                'Start'         => $start,
+                                'Finish'        => $finish,
+                                'Count'         => $count,
+                                'Path'          => $crumbs
+                };
+                $records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$push' => { 'HighScore' => $highscore_hash }});
+                $records->update({ _id => MongoDB::OID->new(value=>$CAF)}, {'$set' => {'Score' => $count}});
+                $users->update({ username => "$user" }, {'$push' => { 'Records_Set' => $highscore_hash }});
+                delete $self->session->{'HighScore'};
+                $self->render( user => $user, start => $start, finish => $finish, count => $count );
+        } else {
+                $self->redirect_to("/");
+        }
+
+
+
+
+}
+
+
+
+
+
 sub getHighScore {
         my $self = shift;
         my $sEcho = $self->param('_') || "42";

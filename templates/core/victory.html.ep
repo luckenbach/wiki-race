@@ -35,7 +35,7 @@
                 </div>
         </div>
 	% if (session 'HighScore') {
-		%= include 'parts/high-score'
+		%= include 'highscore/high-score'
 	%}
 		
         <div class="row">

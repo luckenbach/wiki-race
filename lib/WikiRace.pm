@@ -33,13 +33,15 @@ sub startup {
 	$r->post('/startChallenge')->to('core#startChallenge');
 	
 	$r->get('/shareChallenge/:caf_id')->to('core#startChallenge');
+
+	$r->get('/setHighScore')->to('highscore#scoreForm');
+	
+	$r->post('/setHighScore')->to('highscore#setHighScore');
 	
 	$r->get('/GetHighScore')->to('highscore#getHighScore');
 	
 	$r->get('/personalHighScore')->to('highscore#personalHighScore');
  
-	$r->post('/HighScore')->to('core#setHighScore');
-	
 	$r->get('/Records')->to('highscore#records');
 	
 	$r->get('/reset' => sub {

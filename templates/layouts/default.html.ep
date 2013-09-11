@@ -25,8 +25,8 @@ body {
 		% } else {
 			%= include 'parts/standard-nav'
 		% }
-<script src="/assets/js/jquery.js"></script>
-<script src="/assets/js/jquery.validate.min.js"></script>
+%= javascript '/assets/js/jquery.js'
+%= javascript '/assets/js/base.js'
   </head>
 	<body>
 	
@@ -45,7 +45,6 @@ body {
 
   ga('create', 'UA-43810093-1', 'singleusermode.com');
   ga('send', 'pageview');
-
 </script>
+<div class="modal hide fade" id="modalHolder" role="dialog"></div>
 </html>
-
