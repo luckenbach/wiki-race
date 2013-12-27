@@ -64,8 +64,24 @@ sub getHighScore {
         my @HS_Data;
         while($h = $query->next) {
                	my $hs = $h->{HighScore};
-		my $hash = shift @$hs;
-		push(@HS_Data, $hash);
+		my $hs_count = @$hs;
+		if($hs_count > 1) {
+			my @temp_array;
+			my $record_score = 1000;
+			my $high_hash; 
+			foreach my $score (@$hs) {
+				if( $score->{Count} <= $record_score ) {
+					$record_score = $score->{Count};
+					$high_hash = $score;
+				} else {
+					#NOP
+				}
+			}
+			push(@HS_Data, $high_hash);		
+		} else {
+			my $hash = shift @$hs;
+			push(@HS_Data, $hash);
+		}
         }
         $self->render(json => { sEcho => $sEcho, aaData => [@HS_Data]});
 }
